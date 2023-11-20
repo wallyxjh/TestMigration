@@ -19,9 +19,7 @@ RUN arch                                                                        
     ncurses-dev libtolua-dev exuberant-ctags gdb dnsutils iputils-ping net-tools postgresql-client  mongodb                             && \
     apt-get clean && rm -rf /var/lib/apt/lists/*                                                                                && \
     chmod a+x /root/migration.sh && \
-    curl https://dl.min.io/client/mc/release/linux-amd64/mc --create-dirs -o /root/minio-binaries/mc && \
-    mkdir -p /data/mongodb && \
-    mongod
+    curl https://dl.min.io/client/mc/release/linux-amd64/mc --create-dirs -o /root/minio-binaries/mc
 
 COPY --from=mysql-client /usr/bin/mysql /usr/bin/mysql
 COPY --from=mongo-client /usr/bin/mongosh /usr/bin/mongosh
