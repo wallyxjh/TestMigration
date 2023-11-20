@@ -3,7 +3,7 @@
 # FROM postgres:14 AS psql-client
 #FROM scratch
 FROM ubuntu:latest
-#FROM mongo:latest
+FROM mongo:latest
 LABEL org.opencontainers.image.authors="labring"
 
 USER root
