@@ -16,7 +16,7 @@ RUN arch                                                                        
     apt-get update --fix-missing                                                                                                             && \
     apt-get install -y --no-install-recommends -o Acquire::http::No-Cache=True                                                     \
     ca-certificates curl wget bind9-utils git g++ gcc libc6-dev make pkg-config vim                                                \
-    ncurses-dev libtolua-dev exuberant-ctags gdb dnsutils iputils-ping net-tools postgresql-client  mongodb                             && \
+    ncurses-dev libtolua-dev exuberant-ctags gdb dnsutils iputils-ping net-tools postgresql-client  mongodb  mongodb-org-tools                           && \
     apt-get clean && rm -rf /var/lib/apt/lists/*                                                                                && \
     chmod a+x /root/migration.sh && \
     curl https://dl.min.io/client/mc/release/linux-amd64/mc --create-dirs -o /root/minio-binaries/mc
