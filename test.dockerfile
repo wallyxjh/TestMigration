@@ -20,10 +20,11 @@ RUN arch                                                                        
     ncurses-dev libtolua-dev exuberant-ctags gdb dnsutils iputils-ping net-tools mysql-server postgresql postgresql-contrib gnupg
 RUN chmod a+x /root/migration.sh
 RUN curl https://dl.min.io/client/mc/release/linux-amd64/mc --create-dirs -o /root/minio-binaries/mc
-RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
-RUN echo "deb http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+RUN curl -fsSL https://pgp.mongodb.com/server-6.0.asc | \
+       gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg \
+       --dearmor
+RUN echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 RUN apt-get update && apt-get install -y mongodb-org
-
 #COPY --from=mysql-client /usr/bin/mysql /usr/bin/mysql
 #COPY --from=mongo-client /usr/bin/mongosh /usr/bin/mongosh
 CMD ["sh","/root/migration.sh"]
