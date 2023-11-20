@@ -3,7 +3,7 @@
 #FROM scratch
 FROM ubuntu:22.04
 #FROM mongo:5.0.14-Jammy AS mongo-client
-FROM mongo:latest
+FROM mongo:latest AS mongo-client
 LABEL org.opencontainers.image.authors="labring"
 
 USER root
