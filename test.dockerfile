@@ -1,9 +1,9 @@
 #FROM mysql:8.0.30 AS mysql-client
-#FROM mongo:5.0.14-focal AS mongo-client
 # FROM postgres:14 AS psql-client
 #FROM scratch
-FROM ubuntu:latest
-FROM mongo:latest
+FROM ubuntu:22.04
+FROM mongo:5.0.14-Jammy AS mongo-client
+#FROM mongo:latest
 LABEL org.opencontainers.image.authors="labring"
 
 USER root
@@ -26,5 +26,5 @@ RUN curl -fsSL https://pgp.mongodb.com/server-6.0.asc | \
 RUN echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 RUN apt-get update && apt-get install -y mongodb-org
 #COPY --from=mysql-client /usr/bin/mysql /usr/bin/mysql
-#COPY --from=mongo-client /usr/bin/mongosh /usr/bin/mongosh
+COPY --from=mongo-client /usr/bin/mongosh /usr/bin/mongosh
 CMD ["sh","/root/migration.sh"]
