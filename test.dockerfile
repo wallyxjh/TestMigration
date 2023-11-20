@@ -1,5 +1,5 @@
 FROM mysql:8.0.30 AS mysql-client
-FROM mongo:5.0.14-focal AS mongo-client
+#FROM mongo:5.0.14-focal AS mongo-client
 # FROM postgres:14 AS psql-client
 #FROM scratch
 FROM ubuntu:20.04
@@ -22,5 +22,5 @@ RUN arch                                                                        
     curl https://dl.min.io/client/mc/release/linux-amd64/mc --create-dirs -o /root/minio-binaries/mc
 
 COPY --from=mysql-client /usr/bin/mysql /usr/bin/mysql
-COPY --from=mongo-client /usr/bin/mongosh /usr/bin/mongosh
+#COPY --from=mongo-client /usr/bin/mongosh /usr/bin/mongosh
 CMD ["sh","/root/migration.sh"]
