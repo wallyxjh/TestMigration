@@ -1,3 +1,9 @@
+
+
+
+
+
+
 # 使用基础镜像
 FROM openjdk:8-jdk
 
@@ -18,28 +24,28 @@ ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HIVE_HOME/bin:$MYSQL_HOME/bin
 RUN apt-get update && apt-get install -y wget procps
 
 # 安装 MySQL
-RUN wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.xz
-RUN tar -xJf mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.xz -C /usr/local/
-RUN mv /usr/local/mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64 $MYSQL_HOME
-RUN rm mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.xz
+RUN wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
+RUN tar -xJf mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz -C /usr/local/
+RUN mv /usr/local/mysql-8.0.19-linux-glibc2.12-x86_64 $MYSQL_HOME
+RUN rm mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
 
 # 安装 ZooKeeper
-RUN wget https://downloads.apache.org/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz
-RUN tar -xzf apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz -C /usr/local/
-RUN mv /usr/local/apache-zookeeper-${ZOOKEEPER_VERSION}-bin $ZOOKEEPER_HOME
-RUN rm apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz
+RUN wget https://downloads.apache.org/zookeeper/zookeeper-3.6.1/apache-zookeeper-3.6.1-bin.tar.gz
+RUN tar -xzf apache-zookeeper-3.6.1-bin.tar.gz -C /usr/local/
+RUN mv /usr/local/apache-zookeeper-3.6.1-bin $ZOOKEEPER_HOME
+RUN rm apache-zookeeper-3.6.1-bin.tar.gz
 
 # 安装 Hadoop
-RUN wget https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz
-RUN tar -xzf hadoop-${HADOOP_VERSION}.tar.gz -C /usr/local/
-RUN mv /usr/local/hadoop-${HADOOP_VERSION} $HADOOP_HOME
-RUN rm hadoop-${HADOOP_VERSION}.tar.gz
+RUN wget https://downloads.apache.org/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
+RUN tar -xzf hadoop-3.2.1.tar.gz -C /usr/local/
+RUN mv /usr/local/hadoop-3.2.1 $HADOOP_HOME
+RUN rm hadoop-3.2.1.tar.gz
 
 # 安装 Hive
-RUN wget https://downloads.apache.org/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_VERSION}-bin.tar.gz
-RUN tar -xzf apache-hive-${HIVE_VERSION}-bin.tar.gz -C /usr/local/
-RUN mv /usr/local/apache-hive-${HIVE_VERSION}-bin $HIVE_HOME
-RUN rm apache-hive-${HIVE_VERSION}-bin.tar.gz
+RUN wget https://downloads.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz
+RUN tar -xzf apache-hive-3.1.2-bin.tar.gz -C /usr/local/
+RUN mv /usr/local/apache-hive-3.1.2-bin $HIVE_HOME
+RUN rm apache-hive-3.1.2-bin.tar.gz
 
 # 配置文件和启动脚本 (这里需要你自己提供)
 # COPY mysql-config.cnf $MYSQL_HOME/my.cnf
