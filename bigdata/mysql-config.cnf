@@ -1,4 +1,15 @@
 [mysqld]
-user=mysql
-bind-address=0.0.0.0
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+datadir         = /var/lib/mysql
+secure-file-priv= NULL
 
+# Custom MySQL Settings
+character-set-server=utf8mb4
+collation-server=utf8mb4_unicode_ci
+
+# Only listen on localhost for security
+bind-address    = 127.0.0.1
+
+[client]
+default-character-set=utf8mb4

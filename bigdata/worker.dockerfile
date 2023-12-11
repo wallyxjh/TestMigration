@@ -1,25 +1,14 @@
 # 使用基础镜像
-FROM ubuntu:latest
+FROM openjdk:8-jdk
 
-# 安装依赖
-RUN apt-get update && apt-get install -y \
-    openjdk-8-jdk \
-    wget \
-    ssh \
-    pdsh \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y wget
+RUN apt-get install -y mysql-server
 
 ENV HADOOP_HOME /usr/local/hadoop
 ENV HIVE_HOME /usr/local/hive
 ENV ZOOKEEPER_HOME /usr/local/zookeeper
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-ENV PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HIVE_HOME/bin:$ZOOKEEPER_HOME/bin
 
-## 安装 MySQL
-#RUN wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
-#RUN tar -xJf mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz -C /usr/local/
-#RUN mv /usr/local/mysql-8.0.19-linux-glibc2.12-x86_64 $MYSQL_HOME
-#RUN rm mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
+ENV PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HIVE_HOME/bin:$ZOOKEEPER_HOME/bin
 
 # 安装 ZooKeeper
 RUN wget https://downloads.apache.org/zookeeper/zookeeper-3.7.2/apache-zookeeper-3.7.2-bin.tar.gz
@@ -50,4 +39,4 @@ COPY start-services.sh /usr/local/bin/
 EXPOSE 3306 2181 9870 8088 10000
 
 # 启动命令
-#CMD ["start-services.sh"]
+CMD ["start-services.sh"]
