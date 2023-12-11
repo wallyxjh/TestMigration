@@ -1,18 +1,19 @@
 # 使用基础镜像
 FROM ubuntu:latest
 
+# 安装依赖
+RUN apt-get update && apt-get install -y \
+    openjdk-8-jdk \
+    wget \
+    ssh \
+    pdsh \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV HADOOP_HOME /usr/local/hadoop
 ENV HIVE_HOME /usr/local/hive
-ENV MYSQL_HOME /usr/local/mysql
 ENV ZOOKEEPER_HOME /usr/local/zookeeper
-
-ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HIVE_HOME/bin:$MYSQL_HOME/bin:$ZOOKEEPER_HOME/bin
-
-# 更新软件包列表，安装必要的软件
-RUN apt-get update \
-    && apt-get install -y wget \
-    && apt-get install -y openjdk-8-jdk \
-    && apt-get clean
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+ENV PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HIVE_HOME/bin:$ZOOKEEPER_HOME/bin
 
 ## 安装 MySQL
 #RUN wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
