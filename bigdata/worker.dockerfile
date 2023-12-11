@@ -1,6 +1,5 @@
 # 使用基础镜像
-FROM openjdk:8-jdk
-
+FROM ubuntu:latest
 
 ENV HADOOP_HOME /usr/local/hadoop
 ENV HIVE_HOME /usr/local/hive
@@ -9,14 +8,17 @@ ENV ZOOKEEPER_HOME /usr/local/zookeeper
 
 ENV PATH $PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HIVE_HOME/bin:$MYSQL_HOME/bin:$ZOOKEEPER_HOME/bin
 
-# 更新系统并安装必要的库
-RUN apt-get update && apt-get install -y wget procps
+# 更新软件包列表，安装必要的软件
+RUN apt-get update \
+    && apt-get install -y wget \
+    && apt-get install -y openjdk-8-jdk \
+    && apt-get clean
 
-# 安装 MySQL
-RUN wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
-RUN tar -xJf mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz -C /usr/local/
-RUN mv /usr/local/mysql-8.0.19-linux-glibc2.12-x86_64 $MYSQL_HOME
-RUN rm mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
+## 安装 MySQL
+#RUN wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
+#RUN tar -xJf mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz -C /usr/local/
+#RUN mv /usr/local/mysql-8.0.19-linux-glibc2.12-x86_64 $MYSQL_HOME
+#RUN rm mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
 
 # 安装 ZooKeeper
 RUN wget https://downloads.apache.org/zookeeper/zookeeper-3.7.2/apache-zookeeper-3.7.2-bin.tar.gz
