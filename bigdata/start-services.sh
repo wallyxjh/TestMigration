@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# 启动 MySQL
+service mysql start
+
+# 初始化 MySQL 数据库 (首次运行)
+# mysql < some-initial-script.sql
 
 # 启动 ZooKeeper
 $ZOOKEEPER_HOME/bin/zkServer.sh start
