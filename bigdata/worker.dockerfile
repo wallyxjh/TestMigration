@@ -47,5 +47,4 @@ COPY start-services.sh /usr/local/bin/
 EXPOSE 3306 2181 9870 8088 10000
 
 # 启动命令
-CMD ["start-services.sh"]
-
+#CMD ["start-services.sh"]
