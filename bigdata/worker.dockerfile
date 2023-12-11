@@ -1,5 +1,13 @@
 # 使用基础镜像
-FROM openjdk:8-jdk
+# 第一阶段：使用 openjdk:8-jdk 作为基础镜像
+FROM openjdk:8-jdk AS java-stage
+# 在这里可以添加一些针对 Java 环境的设置或者构建步骤
+
+# 第二阶段：使用 ubuntu:latest 作为基础镜像
+FROM ubuntu:latest
+# 复制第一阶段的结果
+COPY --from=java-stage /path/to/java/build /path/in/ubuntu/container
+# 在这里可以添加一些针对 Ubuntu 环境的设置或者安装步骤
 
 RUN apt-get update && apt-get install -y wget
 RUN apt-get install -y mysql-server
