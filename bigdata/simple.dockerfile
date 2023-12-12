@@ -17,7 +17,7 @@ FROM apache/hadoop:latest AS hadoop-stage
 # 在这里可以配置 Hadoop
 
 # 第五阶段：集成 Hive
-FROM apache/hive:latest AS hive-stage
+FROM apache/hive:4.0.0-beta-1 AS hive-stage
 # 在这里可以配置 Hive
 
 # 最终阶段：将所有服务整合到基础镜像中
