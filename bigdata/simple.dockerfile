@@ -5,7 +5,7 @@ FROM ubuntu:latest AS base
 RUN apt-get update && apt-get install -y vim
 
 # 第二阶段：集成 MySQL
-FROM mysql:8.2.0 AS mysql-stage
+FROM mysql:latest AS mysql-stage
 # 在这里可以配置 MySQL
 
 # 第三阶段：集成 ZooKeeper
