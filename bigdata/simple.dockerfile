@@ -13,7 +13,7 @@ FROM zookeeper:latest AS zookeeper-stage
 # 在这里可以配置 ZooKeeper
 
 # 第四阶段：集成 Hadoop
-FROM apache/hadoop:latest AS hadoop-stage
+FROM apache/hadoop:3.3.6 AS hadoop-stage
 # 在这里可以配置 Hadoop
 
 # 第五阶段：集成 Hive
