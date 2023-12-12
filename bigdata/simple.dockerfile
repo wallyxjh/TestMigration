@@ -2,7 +2,7 @@
 FROM ubuntu:latest AS base
 
 # 安装依赖
-RUN apt-get update && apt-get install -y ...
+RUN apt-get update && apt-get install -y vim
 
 # 第二阶段：集成 MySQL
 FROM mysql:latest AS mysql-stage
