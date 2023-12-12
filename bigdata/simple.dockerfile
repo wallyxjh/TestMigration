@@ -22,10 +22,10 @@ FROM apache/hive:4.0.0-beta-1 AS hive-stage
 
 # 最终阶段：将所有服务整合到基础镜像中
 FROM base
-COPY --from=mysql-stage /path/in/mysql /path/in/ubuntu
-COPY --from=zookeeper-stage /path/in/zookeeper /path/in/ubuntu
-COPY --from=hadoop-stage /path/in/hadoop /path/in/ubuntu
-COPY --from=hive-stage /path/in/hive /path/in/ubuntu
+COPY --from=mysql-stage /usr/bin/mysql /usr/bin/ubuntu
+COPY --from=zookeeper-stage /usr/bin/zookeeper /usr/bin/ubuntu
+COPY --from=hadoop-stage /usr/bin/hadoop /usr/bin/ubuntu
+COPY --from=hive-stage /usr/bin/hive /usr/bin/ubuntu
 
 # 配置启动脚本
 COPY start-services.sh /usr/local/bin/

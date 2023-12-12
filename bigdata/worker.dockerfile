@@ -6,7 +6,7 @@ FROM openjdk:8-jdk AS java-stage
 # 第二阶段：使用 ubuntu:latest 作为基础镜像
 FROM ubuntu:latest
 # 复制第一阶段的结果
-COPY --from=java-stage /path/to/java/build /path/in/ubuntu/container
+COPY --from=java-stage /path/to/java/build /usr/bin/ubuntu/container
 # 在这里可以添加一些针对 Ubuntu 环境的设置或者安装步骤
 
 RUN apt-get update && apt-get install -y wget
