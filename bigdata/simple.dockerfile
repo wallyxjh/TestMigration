@@ -13,11 +13,11 @@ FROM zookeeper:latest AS zookeeper-stage
 # 在这里可以配置 ZooKeeper
 
 # 第四阶段：集成 Hadoop
-FROM your-hadoop-image AS hadoop-stage
+FROM apache/hadoop:latest AS hadoop-stage
 # 在这里可以配置 Hadoop
 
 # 第五阶段：集成 Hive
-FROM your-hive-image AS hive-stage
+FROM apache/hive:latest AS hive-stage
 # 在这里可以配置 Hive
 
 # 最终阶段：将所有服务整合到基础镜像中
