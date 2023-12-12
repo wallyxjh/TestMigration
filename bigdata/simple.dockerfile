@@ -25,7 +25,7 @@ FROM base
 # 复制 MySQL 文件
 COPY --from=mysql-stage /var/lib/mysql /path/in/final/image/mysql
 # 复制 Zookeeper 文件
-COPY --from=zookeeper-stage /usr/local/zookeeper /path/in/final/image/zookeeper
+COPY --from=zookeeper-stage /opt/zookeeper /path/in/final/image/zookeeper
 # 复制 Hadoop 文件
 COPY --from=hadoop-stage /usr/local/hive /path/in/final/image/hadoop
 # 复制 Hive 文件
