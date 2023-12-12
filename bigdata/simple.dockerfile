@@ -1,9 +1,6 @@
 # 使用 Ubuntu 作为基础镜像
 FROM ubuntu:latest AS base
 
-# 安装依赖
-RUN apt-get update && apt-get install -y vim
-
 # 第二阶段：集成 MySQL
 FROM mysql:latest AS mysql-stage
 # 在这里可以配置 MySQL
@@ -27,9 +24,9 @@ COPY --from=mysql-stage /var/lib/mysql /path/in/final/image/mysql
 # 复制 Zookeeper 文件
 COPY --from=zookeeper-stage /apache-zookeeper-3.9.1-bin /path/in/final/image/zookeeper
 # 复制 Hadoop 文件
-COPY --from=hadoop-stage /usr/local/hive /path/in/final/image/hadoop
+COPY --from=hadoop-stage /opt/hadoop /path/in/final/image/hadoop
 # 复制 Hive 文件
-COPY --from=hive-stage /usr/local/hadoop /path/in/final/image/hive
+COPY --from=hive-stage /opt/hive /path/in/final/image/hive
 
 # 配置启动脚本
 COPY start-services.sh /usr/local/bin/
