@@ -9,30 +9,27 @@ FROM mysql:8.2.0 AS mysql-stage
 # 在这里可以配置 MySQL
 
 # 第三阶段：集成 ZooKeeper
-FROM zookeeper:latest AS zookeeper-stage
-RUN ls -l /
+FROM zookeeper:3.9.1 AS zookeeper-stage
 # 在这里可以配置 ZooKeeper
 
 # 第四阶段：集成 Hadoop
 FROM apache/hadoop:3.3.6 AS hadoop-stage
-RUN ls -l /
 # 在这里可以配置 Hadoop
 
 # 第五阶段：集成 Hive
 FROM apache/hive:4.0.0-beta-1 AS hive-stage
-RUN ls -l /
 # 在这里可以配置 Hive
 
 # 最终阶段：将所有服务整合到基础镜像中
 FROM base
 # 复制 MySQL 文件
-COPY --from=mysql-stage /usr/bin/mysql /usr/bin/mysql
+COPY --from=mysql-stage /var/lib/mysql /path/in/final/image/mysql
 # 复制 Zookeeper 文件
-COPY --from=zookeeper-stage /path/to/zookeeper /usr/bin/zookeeper
+COPY --from=zookeeper-stage /usr/local/zookeeper /path/in/final/image/zookeeper
 # 复制 Hadoop 文件
-COPY --from=hadoop-stage /path/to/hadoop /usr/bin/hadoop
+COPY --from=hadoop-stage /usr/local/hive /path/in/final/image/hadoop
 # 复制 Hive 文件
-COPY --from=hive-stage /path/to/hive /usr/bin/hive
+COPY --from=hive-stage /usr/local/hadoop /path/in/final/image/hive
 
 # 配置启动脚本
 COPY start-services.sh /usr/local/bin/
