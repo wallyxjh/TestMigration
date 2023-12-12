@@ -13,7 +13,6 @@
     </property>
     <property>
         <name>javax.jdo.option.ConnectionPassword</name>
-        <value>yourpassword</value>
+        <value>123456</value>
     </property>
 </configuration>
-
